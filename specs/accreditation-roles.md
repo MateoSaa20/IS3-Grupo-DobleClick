@@ -7,9 +7,31 @@ Gestiona RBAC (Control de Acceso Basado en Roles) y marcado de asistencia (acred
 Como organizador, quiero marcar asistencia, para validar presencia.
 - Criterios: Solo inscripciones `confirmed`, cambio a estado `attended`, notificación al usuario
 
+#### Controles de Seguridad (OWASP)
+- Validar autenticación del usuario antes de acceder al módulo de acreditación.
+- Verificar que solo usuarios con rol `organizador` o `admin` puedan marcar asistencia.
+- Registrar en logs todas las acreditaciones realizadas.
+- Expirar sesión tras inactividad prolongada.
+- Validar tokens de sesión para evitar secuestro de sesión.
+
+#### Riesgos Mitigados
+
+- OWASP A01: Broken Access Control
+- OWASP A07: Identification and Authentication Failures
+
+
 ### Historia 2
 Como admin, quiero asignar rol organizer, para delegar gestión.
 - Criterios: Solo admin modifica roles, notificación al usuario
+#### Controles de Seguridad (OWASP)
+- Validar permisos RBAC antes de modificar roles.
+- Registrar auditoría de cambios de roles.
+- Requerir autenticación activa para cambios administrativos.
+- Evitar escalamiento de privilegios mediante validación server-side.
+
+#### Riesgos Mitigados
+- OWASP A01: Broken Access Control
+- OWASP A05: Security Misconfiguration
 
 ### Historia 3
 Como organizador, quiero listar acreditados, para control en tiempo real.
